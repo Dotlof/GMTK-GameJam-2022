@@ -5,6 +5,7 @@ using UnityEngine;
 public class scr_Movement : MonoBehaviour
 {
     public int HP = 6;
+    public Animator animator;
 
     public scr_WeaponSystem[] WeaponSystems;
     private int currentWeaponSystemIndex = 0;
@@ -19,7 +20,7 @@ public class scr_Movement : MonoBehaviour
     private GameObject attackAreaLeft;
     private GameObject attackAreaRight;
     private bool attacking = false;
-    private float timeToAttack = 0.1f;
+    private float timeToAttack = 0.25f;
     private float timer = 0f;
 
     // Start is called before the first frame update
@@ -43,6 +44,8 @@ public class scr_Movement : MonoBehaviour
             HP = 0;
         }
         currentWeaponSystemIndex = HP - 1;
+
+        animator.SetInteger("Health", HP);
 
         direction.x = Input.GetAxisRaw("Horizontal");
         direction.y = Input.GetAxisRaw("Vertical");

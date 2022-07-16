@@ -15,8 +15,9 @@ public class scr_Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Enemy") collision.gameObject.GetComponent<scr_Health>().Damage(damage);
+        if (collision.gameObject.tag == "Enemy" && isEnemy != true) collision.gameObject.GetComponent<scr_Health>().Damage(damage);
         if (collision.gameObject.tag == "Player" && isEnemy == true) collision.gameObject.GetComponent<scr_Movement>().HP--;
+        if (collision.gameObject.tag == "Wall") Destroy(gameObject);
     }
 
     // Start is called before the first frame update
@@ -29,7 +30,7 @@ public class scr_Bullet : MonoBehaviour
         if (shootingDirection == "up" && isEnemy != true) rb.AddRelativeForce(new Vector2(0, speed), ForceMode2D.Impulse);
         else if (shootingDirection == "down" && isEnemy != true) rb.AddRelativeForce(new Vector2(0, -speed), ForceMode2D.Impulse);
         else if (shootingDirection == "left" && isEnemy != true) rb.AddRelativeForce(new Vector2(-speed, 0), ForceMode2D.Impulse);
-        else if (shootingDirection == "right" && isEnemy != true) rb.AddRelativeForce(new Vector2(0, -speed), ForceMode2D.Impulse);
+        else if (shootingDirection == "right" && isEnemy != true) rb.AddRelativeForce(new Vector2(speed, 0), ForceMode2D.Impulse);
         else if (isEnemy) rb.AddRelativeForce(new Vector2(-speed, 0), ForceMode2D.Impulse);
         Destroy(gameObject, range);
     }

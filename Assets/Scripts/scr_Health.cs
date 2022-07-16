@@ -10,7 +10,6 @@ public class scr_Health : MonoBehaviour
     {
         if(health <= 0)
         {
-            Debug.Log("Dead");
             Destroy(gameObject);
         }
     }
